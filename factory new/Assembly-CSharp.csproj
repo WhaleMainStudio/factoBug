@@ -40,13 +40,13 @@
     <Analyzer Include="D:\Logiciels\Unity\Unity\2022.3.5f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\tapisRoulant.cs" />
-     <Compile Include="Assets\baseCubesSpawner.cs" />
-     <Compile Include="Assets\piston.cs" />
-     <Compile Include="Assets\gridManager.cs" />
-     <Compile Include="Assets\playerController.cs" />
-     <Compile Include="Assets\spawnedCube.cs" />
-     <Compile Include="Assets\cubesFusion.cs" />
+     <Compile Include="Assets\Scripts\spawnedCube.cs" />
+     <Compile Include="Assets\Scripts\playerController.cs" />
+     <Compile Include="Assets\Scripts\gridManager.cs" />
+     <Compile Include="Assets\Scripts\baseCubesSpawner.cs" />
+     <Compile Include="Assets\Scripts\tapisRoulant.cs" />
+     <Compile Include="Assets\Scripts\cubesFusion.cs" />
+     <Compile Include="Assets\Scripts\piston.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Logiciels\Unity\Unity\2022.3.5f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -352,13 +352,13 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"D:/Logiciels/Unity/Unity/2022.3.5f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Logiciels/Unity/Unity/2022.3.5f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
-"Assets/baseCubesSpawner.cs"
-"Assets/cubesFusion.cs"
-"Assets/gridManager.cs"
-"Assets/piston.cs"
-"Assets/playerController.cs"
-"Assets/spawnedCube.cs"
-"Assets/tapisRoulant.cs"
+"Assets/Scripts/baseCubesSpawner.cs"
+"Assets/Scripts/cubesFusion.cs"
+"Assets/Scripts/gridManager.cs"
+"Assets/Scripts/piston.cs"
+"Assets/Scripts/playerController.cs"
+"Assets/Scripts/spawnedCube.cs"
+"Assets/Scripts/tapisRoulant.cs"
 -langversion:9.0
 
 /deterministic
