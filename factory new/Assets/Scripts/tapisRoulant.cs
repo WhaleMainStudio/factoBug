@@ -68,7 +68,7 @@ public class tapisRoulant : MonoBehaviour
         }
                 if(this.transform.rotation.eulerAngles.y == 270)
         {
-                                                     grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemZ, null);
+              grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemZ, null);
               grid.setCellBusy(currentCell.x+1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemZ, null);
               grid.setCellBusy(currentCell.x-1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemZ, null);
 

@@ -52,7 +52,6 @@ MonoBehaviour:
   - {fileID: 6447822589009755379}
   - {fileID: 4457152150391739089}
   - {fileID: 9083557297222231285}
-  Cubee: {fileID: 1932068871675246007, guid: 6b85941ad86f20445812d633d14c9d1c, type: 3}
 --- !u!1 &2632647874485106360
 GameObject:
   m_ObjectHideFlags: 0

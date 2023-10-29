@@ -122,6 +122,20 @@ public class gridManager : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
+        public Vector3 getCurrentCellByPosition(int _x, int _y, int _z)
+    {
+        Vector3 localPosition = (new Vector3(_x,_y,_z)) - transform.position;
+        int x = Mathf.FloorToInt(localPosition.x / cellSize);
+        int y = Mathf.FloorToInt(localPosition.y / cellSize);
+        int z = Mathf.FloorToInt(localPosition.z / cellSize);
+
+        x = Mathf.Clamp(x, 0, gridSizeX - 1);
+        y = Mathf.Clamp(y, 0, gridSizeY - 1);
+        z = Mathf.Clamp(z, 0, gridSizeZ - 1);
+
+        return new Vector3(x, y, z);
+    }
+
     
     public Vector3 getCurrentPositionByCell(int x, int y, int z)
     {
