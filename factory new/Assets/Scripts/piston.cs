@@ -20,20 +20,8 @@ public class piston : MonoBehaviour
     {
         grid = GameObject.Find("grid").GetComponent<gridManager>();
         turnManagerData.pistons.Add(this);
-
-          if(turnManagerData.pistons.First() == this)
-        {
-            turnManagerData.pistonAction.Add(this, true);
-            // hitEvent();               
-        }
-        else
-        {
-             turnManagerData.pistonAction.Add(this, false);
-        }
-
+        turnManagerData.pistonAction.Add(this, false);
         StartCoroutine(hit());
-
-
     }
 
 public void coroutineFlipFlop(bool active)
@@ -52,67 +40,11 @@ IEnumerator hit()
 {
     while(canHit)
     {  
-            yield return new WaitForSeconds(hitTime);
-            // if(turnManagerData.pistons.IndexOf(this) - 1 >= 0)
-            // {
-            //     if(turnManagerData.pistonAction[turnManagerData.pistons[turnManagerData.pistons.IndexOf(this) - 1]] == true)
-            //     {
-
-
+            yield return new WaitForSeconds(0.1f);
                   if(turnManagerData.pistonAction[this] == true)
                   {
-                    // if(turnManagerData.cubes.Count() > 0)
-                    // {
-                    // if(turnManagerData.cubesAction[turnManagerData.cubes.Last()] == true)
-                    // {
-                    //     hitEvent();  
-                    // }
-                    // }
-                    // else
-                    // {
                         hitEvent();  
-                   // }
                   }
-                
-               // }
-               
-                    
-                
-            // }
-           //  else
-            // {
-                // if(turnManagerData.pistons.Count() > turnManagerData.pistons.IndexOf(this))
-                // {
-                //     if(turnManagerData.pistonAction[turnManagerData.pistons.Last()] == true)
-                //     {
-                //         if(turnManagerData.cubes.Count() > 0)
-                //         {
-                //             if(turnManagerData.cubesAction[turnManagerData.cubes.Last()] == true)
-                //             {
-                //                 hitEvent();  
-                //             }
-                //         }
-                //                 else
-                //                 {
-                //                     hitEvent();  
-                //                 }
-                //     }
-                // }
-                // else
-                // {
-                //      if(turnManagerData.cubes.Count() > 0)
-                //         {
-                //             if(turnManagerData.cubesAction[turnManagerData.cubes.Last()] == true)
-                //             {
-                //                 hitEvent();  
-                //             }
-                //         }
-                //                 else
-                //                 {
-                //                     hitEvent();  
-                //                 }
-                // }
-            // }
     }
 }
 
@@ -126,13 +58,18 @@ IEnumerator hit()
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
            // hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
         }
-
         turnManagerData.pistonAction[this] = false;
         if(turnManagerData.pistons.Last() == this)
         {
-          //  Debug.Log(turnManagerData.pistons.Last().name + " dernier");
-          //  Debug.Log(turnManagerData.pistons.First().name + " premier");
-            turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
+            if(turnManagerData.fusions.Count > 0)
+            {
+                turnManagerData.fusionAction[turnManagerData.fusions.First()] = true;
+                turnManagerData.fusions.First().addCubes();
+            }
+            else
+            {
+             //   turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
+            }
         }
         else
         {
@@ -152,7 +89,6 @@ IEnumerator hit()
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x+1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
            flipFlopActive(true, grid.getCurrentCellByPosition(hitPoint.transform.position));
         }
-       // turnManagerData.pistonAction[this] = false;
         flipFlop = true;
         
         }
@@ -215,11 +151,11 @@ IEnumerator hit()
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireCube(cellCenter, new Vector3(1, 1, 1));
 
-                                        Vector3 cellCenter2 = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(hitPoints[1].transform.position));
+                    Vector3 cellCenter2 = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(hitPoints[1].transform.position));
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireCube(cellCenter2, new Vector3(1, 1, 1));
 
-                                        Vector3 cellCenter3 = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(hitPoints[2].transform.position));
+                    Vector3 cellCenter3 = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(hitPoints[2].transform.position));
                     Gizmos.color = Color.green;
                     Gizmos.DrawWireCube(cellCenter3, new Vector3(1, 1, 1));
                     }

@@ -5,8 +5,8 @@ using System.Linq;
 
 public class turnManager : MonoBehaviour
 {
-    void Start()
-    {
+   // void Start()
+  //  {
 
             
              
@@ -34,18 +34,40 @@ public class turnManager : MonoBehaviour
                 // }
 
       //  }  
-    }
+  //  }
 
-    public void pistonTurn()
-    {
-         
-         turnManagerData.pistonAction[turnManagerData.pistons.First()] = false;
-            
-         
-    }
 
-    void Update()
-    {
-        
-    }
+
+
+   // private void manageTurns()
+    //{
+
+            // if(turnManagerData.cubes.Count > 0)
+            // {
+            //     if(turnManagerData.cubesAction[turnManagerData.cubes.Last()] == true)
+            //     {
+            //         if(turnManagerData.pistons.Count > 0)
+            //         {
+            //             if(turnManagerData.pistonAction[turnManagerData.pistons.First()] == false)
+            //             {
+            //              turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
+            //             }
+            //         }
+            //         if(turnManagerData.pistons.Count <= 0)
+            //         {
+            //         turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
+            //         }
+            //     }
+
+                // if(turnManagerData.pistonAction[turnManagerData.pistons.Last()] == true)
+                // {
+
+                // }
+          //  }
+   // }
+
+   // void Update()
+   // {
+      //  manageTurns();
+   // }
 }

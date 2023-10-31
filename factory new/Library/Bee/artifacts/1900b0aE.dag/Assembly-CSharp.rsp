@@ -355,6 +355,7 @@
 "Assets/Scripts/baseCubesSpawner.cs"
 "Assets/Scripts/cubesFusion.cs"
 "Assets/Scripts/gridManager.cs"
+"Assets/Scripts/makeCellsStatesBySize.cs"
 "Assets/Scripts/piston.cs"
 "Assets/Scripts/playerController.cs"
 "Assets/Scripts/spawnedCube.cs"

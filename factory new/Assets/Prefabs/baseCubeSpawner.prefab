@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3521252597434190950}
   - component: {fileID: 8048398057166215589}
+  - component: {fileID: 4529447531298366411}
   m_Layer: 0
   m_Name: baseCubeSpawner
   m_TagString: Untagged
@@ -154,6 +155,19 @@ MonoBehaviour:
   cube: {fileID: 6310540212714049462, guid: e42bb8a9e0f59934580999dc79ef8b0e, type: 3}
   spawnpoint: {fileID: 7993839825365443411}
   spawnTime: 0.5
+--- !u!114 &4529447531298366411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7631757458317236301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f071e3e1524418c40b295251eaac0f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeInGrid: {x: 1, y: 1, z: 1}
 --- !u!1 &7993839825365443411
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,9 @@ public class spawnedCube : MonoBehaviour
     private Vector3 cache2;
     private gridManager.cellBusyState cacheCellState2;
     private float delayBetweenMoves = 0.001f;
+    private int numberCellsByMove = 1;
+    private Vector3 lastMove;
+    private bool doubleTurn = false;
 
     void Start()
     {
@@ -28,14 +31,14 @@ public class spawnedCube : MonoBehaviour
         turnManagerData.cubes.Add(this);
 
 
-        if(turnManagerData.cubes.First() == this)
-        {
-            turnManagerData.cubesAction.Add(this, true);             
-        }
-        else
-        {
+      //  if(turnManagerData.cubes.First() == this)
+       // {
+       //     turnManagerData.cubesAction.Add(this, true);             
+       // }
+       // else
+      //  {
              turnManagerData.cubesAction.Add(this, false);
-        }
+       // }
          
       
         Vector3 spawnCell = grid.getCurrentCellByPosition(this.transform.position);
@@ -72,15 +75,10 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
      if(this.transform.parent != null)
      {
         this.transform.parent.transform.position = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.parent.transform.position) + offset);
-       // this.transform.position = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.position) + offset);
-         //this.transform.parent.transform.parent.transform.position = grid.getCurrentPositionByCell(cellToMove);
-        // Debug.Log("dsgdsgdsgfdgdfgdfg");
      }
      else
      {
         this.transform.position = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.position) + offset);
-      //  grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.parent.transform.position)) = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.parent.transform.position + offset));
-    // this.transform.parent.transform.position = new Vector3(grid.getCurrentPositionByCell(cellToMove).x,grid.getCurrentPositionByCell(cellToMove).y,grid.getCurrentPositionByCell(cellToMove).z);
      }
        
      curentCell = grid.getCurrentCellByPosition(this.transform.position);
@@ -91,97 +89,66 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
      grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
 
         }
-
-    
     }
     else
     {
-      //  grid.checkCellBusyObject(cellToMove).GetComponent<spawnedCube>().pistonned(cellToMove);
-       // grid.checkCellBusyObject(cellToMove).GetComponent<spawnedCube>().transform.parent.transform.position = grid.getCurrentPositionByCell(cellToMove + new Vector3(1,0,0));
     }
 
-            
-            //  curentCell = grid.getCurrentCellByPosition(this.transform.position);
-            // cacheCellState = grid.checkCellBusy(curentCell);
-            // cacheCellobject = grid.checkCellBusyObject(curentCell);
-            //  grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
-   
 }
 
     public void checkCurrentCell()
     {
-         Vector3 currentCell = grid.getCurrentCellByPosition(this.transform.position);
-         if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementAddX)
+        // if(this.transform.childCount > 0)
+        // {
+        //     numberCellsByMove = this.transform.childCount + 1;
+        // }
+        // else
+        // {
+        //     numberCellsByMove = 1;
+        // }
+
+        Vector3 currentCell = grid.getCurrentCellByPosition(this.transform.position);
+        
+        
+            if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z) != gridManager.cellBusyState.Collider)
+            {
+            moveToCell((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z);
+           // this.transform.position = grid.getCurrentPositionByCell((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z);
+          //  lastMove = new Vector3(0, -1, 0);
+            canMove = true;
+            }
+        
+        if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementAddX)
         {
             moveToCell((int)currentCell.x+1, (int)currentCell.y, (int)currentCell.z);
+            lastMove = new Vector3(1, 0, 0);
             canMove = true;
         }
-                if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementAddZ)
+        if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementAddZ)
         {
             moveToCell((int)currentCell.x, (int)currentCell.y, (int)currentCell.z+1);
+            lastMove = new Vector3(0, 0, 1);
             canMove = true;
         }
-                if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementRemX)
+        if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementRemX)
         {
             moveToCell((int)currentCell.x-1, (int)currentCell.y, (int)currentCell.z);
+            lastMove = new Vector3(-1, 0, 0);
             canMove = true;
         }
-                if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementRemZ)
+        if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementRemZ)
         {
             moveToCell((int)currentCell.x, (int)currentCell.y, (int)currentCell.z-1);
+            lastMove = new Vector3(0, 0, -1);
             canMove = true;
         }
-            if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.Fusion)
-        {
-            fusion();
-          //  checkCurrentCell();
-        }
     }
-
-    private void fusion()
-    {
-       
-
-        if(waitForFusion == true)
-        {
-           
-                if(grid.checkCellBusyObject(curentCell).tag == "fusion")
-                {
-                     waitForFusion = false;
-                    // moveToCell(grid.getCurrentCellByPosition(this.transform.parent.transform.position));
-                    GameObject cubesFusion = grid.checkCellBusyObject(curentCell);
-                   // Debug.Log(cubesFusion.name);
-                   cubesFusion.GetComponent<cubesFusion>().addCube(this.gameObject);
-
-
-
-                    turnManagerData.cubesAction[this] = false;
-                if(turnManagerData.cubes.Last() == this)
-                {
-                    turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
-                }
-                else
-                    {
-                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
-                    }
-                  //  moveToCell(grid.getCurrentCellByPosition(this.transform.position));
-                }
-        }
-
-
-    }
-
 
     public void moveToCell(int _x, int _y, int _z)
     {
         x = _x;
         y = _y;
         z = _z;
-      //  move = true;
-      //  cache2 = new Vector3(x,y,z);
-      //  cacheCellState2 = grid.checkCellBusy(cache2);
-       // grid.setCellBusy(cache2, gridManager.cellBusyState.Collider, this.gameObject);
-        
     }
 
         public void moveToCell(Vector3 cellToMove)
@@ -203,33 +170,32 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
         {
              if(turnManagerData.cubesAction[this] == true)
              {
-             this.transform.position = Vector3.MoveTowards(this.transform.position, grid.getCurrentPositionByCell(x,y,z), 3* Time.deltaTime);
+                if(this.transform.parent == null)
+                {
+                this.transform.position = Vector3.MoveTowards(this.transform.position, grid.getCurrentPositionByCell(x,y,z), 30* Time.deltaTime);
+                }
+                else
+                {
+                grid.setCellBusy(curentCell, cacheCellState, cacheCellobject);
+                checkCurrentCell();
+                
+                curentCell = grid.getCurrentCellByPosition(this.transform.position);
+                cacheCellState = grid.checkCellBusy(curentCell);
+                cacheCellobject = grid.checkCellBusyObject(curentCell);
+                grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
+                endTurn();
+                }
              }
         }
         else
         {
             if(turnManagerData.cubesAction[this] == true)
-             {
-                turnManagerData.cubesAction[this] = false;
-                if(turnManagerData.cubes.Last() == this)
-                {
-                    turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
-                }
-                else
-                    {
-                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
-                    }
-             }
-       //     turnManagerData.cubesAction[this] = true;
-       //     checkCurrentCell();
+            {
+            endTurn();
+            }
         }
-        
-        // if(grid.getCurrentCellByPosition(this.transform.parent.transform.position) == new Vector3(x,y,z))
-        // {
 
-
-        // }
-       if(this.transform.position == grid.getCurrentPositionByCell(x,y,z))
+       if(this.transform.position == grid.getCurrentPositionByCell(x,y,z) && turnManagerData.cubesAction[this] == true)
             {
             grid.setCellBusy(curentCell, cacheCellState, cacheCellobject);
             checkCurrentCell();
@@ -239,15 +205,7 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
             cacheCellobject = grid.checkCellBusyObject(curentCell);
             grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
 
-             turnManagerData.cubesAction[this] = false;
-                if(turnManagerData.cubes.Last() == this)
-                {
-                    turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
-                }
-                else
-                    {
-                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
-                    }
+            endTurn();
 
             }
     }
@@ -274,6 +232,62 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
         }
     }
 
+    private void endTurn()
+    {
+         Vector3 currentCell = grid.getCurrentCellByPosition(this.transform.position);
+
+        if(this.transform.childCount > 0)
+        {
+            if(doubleTurn == false)
+            {
+           
+            moveToCell(currentCell + lastMove);
+            canMove = true;
+            doubleTurn = true;
+            return;
+            }
+            if(doubleTurn == true)
+            {
+                 turnManagerData.cubesAction[this] = false;
+                    if(turnManagerData.cubes.Last() == this)
+                    {
+                        if(turnManagerData.pistons.Count > 0)
+                        {               
+                          turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
+                        }
+                        else
+                        {
+                        //  turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
+                        }
+                    }
+                    else
+                    {
+                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
+                    }
+                    doubleTurn = false;
+            }
+        }
+        else
+        {
+                    turnManagerData.cubesAction[this] = false;
+                    if(turnManagerData.cubes.Last() == this)
+                    {
+                        if(turnManagerData.pistons.Count > 0)
+                        {               
+                          turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
+                        }
+                        else
+                        {
+                        //  turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
+                        }
+                    }
+                    else
+                    {
+                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
+                    }
+        }
+                   
+    }
 
     void Update()
     {

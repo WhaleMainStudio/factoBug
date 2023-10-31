@@ -45,6 +45,7 @@
      <Compile Include="Assets\Scripts\gridManager.cs" />
      <Compile Include="Assets\Scripts\baseCubesSpawner.cs" />
      <Compile Include="Assets\Scripts\tapisRoulant.cs" />
+     <Compile Include="Assets\Scripts\makeCellsStatesBySize.cs" />
      <Compile Include="Assets\Scripts\cubesFusion.cs" />
      <Compile Include="Assets\Scripts\turnManagerData.cs" />
      <Compile Include="Assets\Scripts\turnManager.cs" />
