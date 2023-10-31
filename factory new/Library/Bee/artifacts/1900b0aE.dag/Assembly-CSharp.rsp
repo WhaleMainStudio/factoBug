@@ -359,6 +359,8 @@
 "Assets/Scripts/playerController.cs"
 "Assets/Scripts/spawnedCube.cs"
 "Assets/Scripts/tapisRoulant.cs"
+"Assets/Scripts/turnManager.cs"
+"Assets/Scripts/turnManagerData.cs"
 -langversion:9.0
 
 /deterministic

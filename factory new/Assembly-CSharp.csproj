@@ -46,6 +46,8 @@
      <Compile Include="Assets\Scripts\baseCubesSpawner.cs" />
      <Compile Include="Assets\Scripts\tapisRoulant.cs" />
      <Compile Include="Assets\Scripts\cubesFusion.cs" />
+     <Compile Include="Assets\Scripts\turnManagerData.cs" />
+     <Compile Include="Assets\Scripts\turnManager.cs" />
      <Compile Include="Assets\Scripts\piston.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Logiciels\Unity\Unity\2022.3.5f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>

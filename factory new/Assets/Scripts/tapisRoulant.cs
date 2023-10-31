@@ -10,6 +10,8 @@ public class tapisRoulant : MonoBehaviour
     void Start()
     {
         grid = GameObject.Find("grid").GetComponent<gridManager>();
+        turnManagerData.tapis.Add(this.GetComponent<tapisRoulant>());
+
          currentCell = grid.getCurrentCellByPosition(this.transform.position);
         flipFlopActive(true);
     }

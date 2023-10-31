@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -81,6 +80,10 @@ public class gridManager : MonoBehaviour
      {
         Vector3 cellKey = new Vector3((float)x, (float)y, (float)z); 
         cellsStates.TryGetValue(cellKey, out cellBusyState cellState);
+        if(!cellsStates.ContainsKey(cellKey))
+        {
+        Debug.Log(cellState);
+        }
         return cellState;
      }
 
@@ -88,6 +91,10 @@ public class gridManager : MonoBehaviour
      {
         Vector3 cellKey = _cellKey; 
         cellsStates.TryGetValue(cellKey, out cellBusyState cellState);
+        if(!cellsStates.ContainsKey(cellKey))
+        {
+        Debug.Log(cellState);
+        }
         return cellState;
      }
 

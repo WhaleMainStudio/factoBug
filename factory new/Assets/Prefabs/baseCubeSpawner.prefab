@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aec27bf7fe13014ca5f4354c747a16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cube: {fileID: 6310540212714049462, guid: 7aa5b098b38dd8b4788352860d6a96a9, type: 3}
+  cube: {fileID: 6310540212714049462, guid: e42bb8a9e0f59934580999dc79ef8b0e, type: 3}
   spawnpoint: {fileID: 7993839825365443411}
   spawnTime: 0.5
 --- !u!1 &7993839825365443411

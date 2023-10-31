@@ -68,10 +68,14 @@ public void addCube(GameObject cubeRef)
         {
             //Destroy(cube);
               if(cube != cubesInZone[0])
-              {
+              {     
+                cube.GetComponent<spawnedCube>().moveSpeed = 0f;
                   cube.transform.SetParent(cubesInZone[0].transform);
               }
         }
         cubesInZone.Clear();
     }
+
+
+    
 }
