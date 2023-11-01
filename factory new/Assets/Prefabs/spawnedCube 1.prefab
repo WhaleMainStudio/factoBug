@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d174b8cf07e18314b92c0b138e85100e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI_Victory: {fileID: 558613184199767984, guid: d369f074c9bf0bc4d9a30679c2fcaeb9, type: 3}
   moveSpeed: 2
   canMove: 0
   x: 0

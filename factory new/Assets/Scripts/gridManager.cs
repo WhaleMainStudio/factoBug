@@ -9,7 +9,7 @@ public class gridManager : MonoBehaviour
     public int gridSizeY = 5;
     public int gridSizeZ = 5;
     public float cellSize = 1f;
-
+    [SerializeField] private GameObject UI_Victory;
     private Dictionary<Vector3, cellBusyState> cellsStates = new Dictionary<Vector3, cellBusyState>();
     private Dictionary<Vector3, GameObject> cellsObjects = new Dictionary<Vector3, GameObject>();
 
@@ -35,7 +35,7 @@ public class gridManager : MonoBehaviour
         {
             cellsStates[cellKey] = state;
 
-                       if(gameObjectRef != null)
+            if(gameObjectRef != null)
             {
             cellsObjects[cellKey] = gameObjectRef;
             }
@@ -44,12 +44,17 @@ public class gridManager : MonoBehaviour
         {
             cellsStates.Add(cellKey, state);
 
-                        if(gameObjectRef != null)
+            if(gameObjectRef != null)
             {
             cellsObjects.Add(cellKey, gameObjectRef);
             }
         }
 
+    }
+
+    public void victory()
+    {
+        Instantiate(UI_Victory);
     }
 
         public void setCellBusy(Vector3 cellID, cellBusyState state, GameObject gameObjectRef)
@@ -84,7 +89,6 @@ public class gridManager : MonoBehaviour
         cellsStates.TryGetValue(cellKey, out cellBusyState cellState);
         if(!cellsStates.ContainsKey(cellKey))
         {
-    //    Debug.Log(cellState);
         }
         return cellState;
      }
@@ -95,7 +99,6 @@ public class gridManager : MonoBehaviour
         cellsStates.TryGetValue(cellKey, out cellBusyState cellState);
         if(!cellsStates.ContainsKey(cellKey))
         {
-      //  Debug.Log(cellState);
         }
         return cellState;
      }

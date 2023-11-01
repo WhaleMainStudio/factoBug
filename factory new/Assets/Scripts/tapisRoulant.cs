@@ -40,7 +40,7 @@ public class tapisRoulant : MonoBehaviour
         }
                 if(this.transform.rotation.eulerAngles.y == 0)
         {
-                            grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemX, null);
+              grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemX, null);
               grid.setCellBusy(currentCell.x+1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemX, null);
               grid.setCellBusy(currentCell.x-1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementRemX, null);
 
@@ -55,7 +55,7 @@ public class tapisRoulant : MonoBehaviour
         }
                 if(this.transform.rotation.eulerAngles.y == 180)
         {
-                                        grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementAddX, null);
+              grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementAddX, null);
               grid.setCellBusy(currentCell.x+1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementAddX, null);
               grid.setCellBusy(currentCell.x-1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementAddX, null);
 

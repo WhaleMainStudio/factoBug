@@ -7,10 +7,8 @@ using UnityEngine;
 public class piston : MonoBehaviour
 {
     [SerializeField] private List<GameObject> hitPoints;
-
-   // [SerializeField] private GameObject Cubee;
         private gridManager grid;
-    private float hitTime = 1f;
+    private float hitTime = 0.5f;
     private bool canHit = true;
     private bool flipFlop = false;
     private Dictionary<Vector3, gridManager.cellBusyState> cachesStates = new  Dictionary<Vector3, gridManager.cellBusyState>();
@@ -40,7 +38,7 @@ IEnumerator hit()
 {
     while(canHit)
     {  
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(hitTime);
                   if(turnManagerData.pistonAction[this] == true)
                   {
                         hitEvent();  
@@ -56,7 +54,6 @@ IEnumerator hit()
         {
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
-           // hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
         }
         turnManagerData.pistonAction[this] = false;
         if(turnManagerData.pistons.Last() == this)
@@ -68,7 +65,6 @@ IEnumerator hit()
             }
             else
             {
-             //   turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
             }
         }
         else
@@ -87,7 +83,7 @@ IEnumerator hit()
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x+1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
             flipFlopActive(true, grid.getCurrentCellByPosition(hitPoint.transform.position));
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x+1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
-           flipFlopActive(true, grid.getCurrentCellByPosition(hitPoint.transform.position));
+            flipFlopActive(true, grid.getCurrentCellByPosition(hitPoint.transform.position));
         }
         flipFlop = true;
         
@@ -162,15 +158,6 @@ IEnumerator hit()
 
                 }
             }
-        }
-    }
-
-
-        void Update()
-    {
-        if(turnManagerData.pistonAction[this] == true)
-        {
-     //  Debug.Log(grid.getCurrentCellByPosition(this.transform.position) + "   " + grid.checkCellBusy(grid.getCurrentCellByPosition(this.transform.position)));
         }
     }
 }

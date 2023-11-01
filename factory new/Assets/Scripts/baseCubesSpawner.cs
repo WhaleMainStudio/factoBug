@@ -8,7 +8,7 @@ public class baseCubesSpawner : MonoBehaviour
     [SerializeField] private GameObject cube;
     [SerializeField] private GameObject spawnpoint;
         private gridManager grid;
-    [SerializeField] private float spawnTime = 2f;
+    [SerializeField] private float spawnTime = 0.1f;
     private bool spawnCubes = true;
     
 
@@ -32,7 +32,7 @@ IEnumerator spawnCube()
 {
     while(spawnCubes)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(spawnTime);
 
         if(grid.checkCellBusy(grid.getCurrentCellByPosition(spawnpoint.transform.position)) != gridManager.cellBusyState.Collider)
         {
@@ -83,12 +83,4 @@ IEnumerator spawnCube()
         }
     }
 }
-
-        void Update()
-    {
-        if(turnManagerData.spawnerAction[this] == true)
-        {
-      // Debug.Log(grid.getCurrentCellByPosition(this.transform.position) + "   " + grid.checkCellBusy(grid.getCurrentCellByPosition(this.transform.position)));
-        }
-    }
 }

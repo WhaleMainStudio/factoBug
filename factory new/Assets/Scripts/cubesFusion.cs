@@ -6,10 +6,12 @@ using Unity.VisualScripting;
 
 public class cubesFusion : MonoBehaviour
 {
+    public List<Material> _materials = new List<Material>();
     private gridManager grid;
     private  Vector3 currentCell;
     private List<GameObject> cubesInZone = new List<GameObject>();
-    private bool lockk = false;
+    private bool canHit = true;
+    private bool flipFlop = false;
 
     void Start()
     {
@@ -17,52 +19,11 @@ public class cubesFusion : MonoBehaviour
         turnManagerData.fusions.Add(this);
         turnManagerData.fusionAction.Add(this, false);
         currentCell = grid.getCurrentCellByPosition(this.transform.position);
-        //flipFlopActive(true);
     }
-
-
-    //  private void flipFlopActive(bool active)
-    // {
-    //     if(active)
-    //     {
-    //           grid.setCellBusy(currentCell.x, currentCell.y-1, currentCell.z, gridManager.cellBusyState.Fusion, this.gameObject);
-    //           grid.setCellBusy(currentCell.x+1, currentCell.y-1, currentCell.z, gridManager.cellBusyState.Fusion, this.gameObject);
-    //           grid.setCellBusy(currentCell.x-1, currentCell.y-1, currentCell.z, gridManager.cellBusyState.Fusion, this.gameObject);
-
-
-    //           grid.setCellBusy(currentCell.x, currentCell.y-1, currentCell.z+1, gridManager.cellBusyState.Fusion, this.gameObject);
-    //           grid.setCellBusy(currentCell.x+1, currentCell.y-1, currentCell.z+1, gridManager.cellBusyState.Fusion, this.gameObject);
-    //           grid.setCellBusy(currentCell.x-1, currentCell.y-1, currentCell.z+1, gridManager.cellBusyState.Fusion, this.gameObject);
-
-    //           grid.setCellBusy(currentCell.x, currentCell.y-1, currentCell.z-1, gridManager.cellBusyState.Fusion, this.gameObject);
-    //           grid.setCellBusy(currentCell.x+1, currentCell.y-1, currentCell.z-1, gridManager.cellBusyState.Fusion, this.gameObject);
-    //           grid.setCellBusy(currentCell.x-1, currentCell.y-1, currentCell.z-1, gridManager.cellBusyState.Fusion, this.gameObject);
-    //     }
-    //     else
-    //     {
-    //           grid.setCellBusy(currentCell.x, currentCell.y-1, currentCell.z, gridManager.cellBusyState.Void, null);
-    //           grid.setCellBusy(currentCell.x+1, currentCell.y-1, currentCell.z, gridManager.cellBusyState.Void, null);
-    //           grid.setCellBusy(currentCell.x-1, currentCell.y-1, currentCell.z, gridManager.cellBusyState.Void, null);
-
-    //           grid.setCellBusy(currentCell.x, currentCell.y-1, currentCell.z+1, gridManager.cellBusyState.Void, null);
-    //           grid.setCellBusy(currentCell.x+1, currentCell.y-1, currentCell.z+1, gridManager.cellBusyState.Void, null);
-    //           grid.setCellBusy(currentCell.x-1, currentCell.y-1, currentCell.z+1, gridManager.cellBusyState.Void, null);
-
-    //           grid.setCellBusy(currentCell.x, currentCell.y-1, currentCell.z-1, gridManager.cellBusyState.Void, null);
-    //           grid.setCellBusy(currentCell.x+1, currentCell.y-1, currentCell.z-1, gridManager.cellBusyState.Void, null);
-    //           grid.setCellBusy(currentCell.x-1, currentCell.y-1, currentCell.z-1, gridManager.cellBusyState.Void, null);
-
-    //     }
-    // }
 
 public void addCubes()
 {
     cubesInZone.Clear();
-
-
-   
-
-
 
     if(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z) != null && grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z).transform.childCount == 0)
     {
@@ -71,42 +32,42 @@ public void addCubes()
 
         if(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z) != null && grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z).transform.childCount == 0) 
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z) != null && grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z+1) != null && grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z+1).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z+1).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z+1));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z+1));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z+1) != null && grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z+1).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z+1).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z+1));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z+1));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z+1) != null && grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z+1).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z+1).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z+1));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z+1));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z-1) != null && grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z-1).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z-1).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z-1));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z-1));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z-1) != null && grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z-1).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z-1).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z-1));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x+1, (int)currentCell.y-1, (int)currentCell.z-1));
     }
 
         if(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z-1) != null && grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z-1).transform.parent == null && grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z-1).transform.childCount == 0)
     {
-cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z-1));
+        cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.y-1, (int)currentCell.z-1));
     }
     
 
@@ -118,22 +79,43 @@ cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.
     {
         if(cubesInZone.Count == 1)
         {
-      //  Destroy(cubesInZone[0]);
         }
         endTurn();
     }
 }
+    IEnumerator hit() 
+{
+    while(canHit)
+    {  
+            yield return new WaitForSeconds(1f);
+            hitEvent();  
+    }
+}
     public void fusionBlocs()
     {
-
+        bool canFusion = false;
         foreach (GameObject cube in cubesInZone)
         {
+              cubesInZone[0].gameObject.GetComponent<MeshRenderer>().material = _materials[0];
               if(cube != cubesInZone[0])
               {    
+                  canFusion = true;
                   cube.transform.SetParent(cubesInZone[0].transform);
+                  cube.GetComponent<MeshRenderer>().material = _materials[0];
               }
         }
-        endTurn();
+
+        if(canFusion)
+        {
+        canHit = true;
+        StartCoroutine(hit());
+        canFusion = false;
+        }
+        else
+        {
+            canHit = false;
+            endTurn();
+        }
     }
 
     private void endTurn()
@@ -147,10 +129,6 @@ cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.
                         {               
                           turnManagerData.spawnerAction[turnManagerData.spawners.First()] = true;
                         }
-                       // else
-                       //{
-                       // turnManagerData.fusionAction[turnManagerData.fusions.First()] = true;
-                       //}
                     }
                     else
                     {
@@ -162,11 +140,20 @@ cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.
                     }
     }
 
-        void Update()
+    private void hitEvent()
     {
-        if(turnManagerData.fusionAction[this] == true)
+        if(flipFlop)
         {
-     //  Debug.Log(grid.getCurrentCellByPosition(this.transform.position) + "   " + grid.checkCellBusy(grid.getCurrentCellByPosition(this.transform.position)));
+        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+1, this.transform.localPosition.z);    
+        canHit = false;
+        StopCoroutine(hit());
+        endTurn();
+        flipFlop = false; 
+        }
+        else
+        {
+        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-1, this.transform.localPosition.z);
+        flipFlop = true;
         }
     }
 }
