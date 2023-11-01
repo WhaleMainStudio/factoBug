@@ -20,7 +20,9 @@ public class gridManager : MonoBehaviour
         MovementRemX,
         MovementAddZ,
         MovementRemZ,
+        MovementAddY,
         Fusion,
+        Win,
         Collider
     }
 
@@ -82,7 +84,7 @@ public class gridManager : MonoBehaviour
         cellsStates.TryGetValue(cellKey, out cellBusyState cellState);
         if(!cellsStates.ContainsKey(cellKey))
         {
-        Debug.Log(cellState);
+    //    Debug.Log(cellState);
         }
         return cellState;
      }
@@ -93,7 +95,7 @@ public class gridManager : MonoBehaviour
         cellsStates.TryGetValue(cellKey, out cellBusyState cellState);
         if(!cellsStates.ContainsKey(cellKey))
         {
-        Debug.Log(cellState);
+      //  Debug.Log(cellState);
         }
         return cellState;
      }

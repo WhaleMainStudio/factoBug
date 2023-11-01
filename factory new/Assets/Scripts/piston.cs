@@ -40,7 +40,7 @@ IEnumerator hit()
 {
     while(canHit)
     {  
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
                   if(turnManagerData.pistonAction[this] == true)
                   {
                         hitEvent();  
@@ -170,7 +170,7 @@ IEnumerator hit()
     {
         if(turnManagerData.pistonAction[this] == true)
         {
-        Debug.Log(this.name);
+     //  Debug.Log(grid.getCurrentCellByPosition(this.transform.position) + "   " + grid.checkCellBusy(grid.getCurrentCellByPosition(this.transform.position)));
         }
     }
 }

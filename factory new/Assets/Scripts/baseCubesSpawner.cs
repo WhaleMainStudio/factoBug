@@ -36,15 +36,6 @@ IEnumerator spawnCube()
 
         if(grid.checkCellBusy(grid.getCurrentCellByPosition(spawnpoint.transform.position)) != gridManager.cellBusyState.Collider)
         {
-           // if(turnManagerData.cubes.Count > 0)
-           // {
-           // if(turnManagerData.cubesAction[turnManagerData.cubes.Last()] == true)
-           // {
-           //     Instantiate(cube, spawnpoint.transform.position, Quaternion.identity);
-          //  }
-           // }
-           // else
-           // {
             if(turnManagerData.spawnerAction[this] == true)
             {
                 turnManagerData.spawnerAction[this] = false;
@@ -52,8 +43,9 @@ IEnumerator spawnCube()
                 if(turnManagerData.spawners.Last() == this)
                     {
                         if(turnManagerData.cubes.Count > 0)
-                        {               
+                        {    
                           turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
+                          Debug.Log("next first cube");
                         }
                         else
                         {
@@ -65,10 +57,6 @@ IEnumerator spawnCube()
                     turnManagerData.spawnerAction[turnManagerData.spawners[turnManagerData.spawners.IndexOf(this) + 1]] = true;
                     }
             }
-
-           // }
-
-            
         }
         else
         {
@@ -80,6 +68,7 @@ IEnumerator spawnCube()
                         if(turnManagerData.cubes.Count > 0)
                         {               
                           turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
+                          Debug.Log("next first cube");
                         }
                         else
                         {
@@ -94,4 +83,12 @@ IEnumerator spawnCube()
         }
     }
 }
+
+        void Update()
+    {
+        if(turnManagerData.spawnerAction[this] == true)
+        {
+      // Debug.Log(grid.getCurrentCellByPosition(this.transform.position) + "   " + grid.checkCellBusy(grid.getCurrentCellByPosition(this.transform.position)));
+        }
+    }
 }

@@ -161,4 +161,12 @@ cubesInZone.Add(grid.checkCellBusyObject((int)currentCell.x-1, (int)currentCell.
                          }
                     }
     }
+
+        void Update()
+    {
+        if(turnManagerData.fusionAction[this] == true)
+        {
+     //  Debug.Log(grid.getCurrentCellByPosition(this.transform.position) + "   " + grid.checkCellBusy(grid.getCurrentCellByPosition(this.transform.position)));
+        }
+    }
 }
