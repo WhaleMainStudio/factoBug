@@ -17,7 +17,4 @@ public static class turnManagerData
     public static Dictionary<piston, bool> pistonAction = new Dictionary<piston, bool>();
     public static Dictionary<baseCubesSpawner, bool> spawnerAction = new Dictionary<baseCubesSpawner, bool>();
     public static Dictionary<cubesFusion, bool> fusionAction = new Dictionary<cubesFusion, bool>();
-    
-
-    
 }

@@ -1,0 +1,174 @@
+{
+    "name": "IA_playerController",
+    "maps": [
+        {
+            "name": "playerControls",
+            "id": "4728eab4-3bd5-455a-98b9-84b81cc97b8e",
+            "actions": [
+                {
+                    "name": "PlaceObject",
+                    "type": "Button",
+                    "id": "865c618b-9243-420c-82a3-79555514666e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "timeSpeed+",
+                    "type": "Button",
+                    "id": "52f03414-8733-4418-84f9-dcf821bbaed7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "timeSpeed-",
+                    "type": "Button",
+                    "id": "9bb3ba7b-c5dd-4059-8356-145a3ea7b4b6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "swapSelectedObject+",
+                    "type": "Value",
+                    "id": "ac53c939-d6f3-40fa-85f6-ee896511e202",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "swapSelectedObject-",
+                    "type": "Value",
+                    "id": "d3223044-fd09-470a-bb4b-5f9447f7aa29",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DestroyObject",
+                    "type": "Button",
+                    "id": "b3813ab6-8f52-402e-a845-23b280a0f281",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "turnObject",
+                    "type": "Button",
+                    "id": "672f89d8-73c0-4661-b42e-06f45fb4d922",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "mainMenu",
+                    "type": "Button",
+                    "id": "2f4600be-90a8-422c-971e-e22923c41a96",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f27527ed-36de-4baf-a5db-850c5a06ff4e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlaceObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd291c1d-44ac-4917-9bb4-a7970ab13f15",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "timeSpeed+",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed8a1129-ad7a-497f-a20f-9e89dd6f5b24",
+                    "path": "<Keyboard>/numpadMinus",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "timeSpeed-",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92a0bc3a-9004-46df-8788-ef3ed1b4b77d",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "swapSelectedObject+",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c066f259-355a-4e9b-8acc-aa76e6f08444",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "swapSelectedObject-",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5de11fe8-0867-4974-a9c2-50f87f582e2f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DestroyObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab2a1492-ef2b-4f7c-9f39-adcd65b42260",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "turnObject",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49133432-7479-4cec-ac8e-93a5480574b3",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "mainMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

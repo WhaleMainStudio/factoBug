@@ -12,10 +12,12 @@ public class cubesFusion : MonoBehaviour
     private List<GameObject> cubesInZone = new List<GameObject>();
     private bool canHit = true;
     private bool flipFlop = false;
+    private turnManager _turnManager;
 
     void Start()
     {
         grid = GameObject.Find("grid").GetComponent<gridManager>();
+        _turnManager = GameObject.Find("Managers").GetComponent<turnManager>();
         turnManagerData.fusions.Add(this);
         turnManagerData.fusionAction.Add(this, false);
         currentCell = grid.getCurrentCellByPosition(this.transform.position);
@@ -94,6 +96,7 @@ public void addCubes()
     public void fusionBlocs()
     {
         bool canFusion = false;
+        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-1, this.transform.localPosition.z);
         foreach (GameObject cube in cubesInZone)
         {
               cubesInZone[0].gameObject.GetComponent<MeshRenderer>().material = _materials[0];
@@ -124,36 +127,31 @@ public void addCubes()
 
                     if(turnManagerData.fusions.Last() == this)
                     {
-
-                        if(turnManagerData.spawners.Count > 0)
-                        {               
-                          turnManagerData.spawnerAction[turnManagerData.spawners.First()] = true;
-                        }
-                    }
-                    else
-                    {
-                            if(turnManagerData.fusions.Count > 0)
-                         {
-                            turnManagerData.fusionAction[turnManagerData.fusions[turnManagerData.fusions.IndexOf(this) + 1]] = true;
-                            turnManagerData.fusions[turnManagerData.fusions.IndexOf(this) + 1].addCubes();
-                         }
-                    }
+                        _turnManager.nextTurnRoutine("fusion", turnManagerData.fusions.IndexOf(this));
+                     }
+                     else
+                     {
+                         _turnManager.nextTurn("fusion", turnManagerData.fusions.IndexOf(this));
+                     }
     }
 
     private void hitEvent()
     {
-        if(flipFlop)
-        {
         this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y+1, this.transform.localPosition.z);    
         canHit = false;
         StopCoroutine(hit());
         endTurn();
-        flipFlop = false; 
-        }
-        else
-        {
-        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y-1, this.transform.localPosition.z);
-        flipFlop = true;
-        }
     }
+
+
+    // void Update()
+    // {
+    //     if(turnManagerData.fusions.Contains(this))
+    //     {
+    //     if(turnManagerData.fusionAction[turnManagerData.fusions[turnManagerData.fusions.IndexOf(this)]] == true)
+    //     {
+    //     Debug.Log("tour de fusion");
+    //     }
+    //     }
+    // }
 }

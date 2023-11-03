@@ -26,6 +26,19 @@ public class gridManager : MonoBehaviour
         Collider
     }
 
+    void Start()
+    {
+        turnManagerData.cubes.Clear();
+        turnManagerData.cubesAction.Clear();
+        turnManagerData.pistons.Clear();
+        turnManagerData.pistonAction.Clear();
+        turnManagerData.fusions.Clear();
+        turnManagerData.fusionAction.Clear();
+        turnManagerData.spawners.Clear();
+        turnManagerData.spawnerAction.Clear();
+        turnManagerData.tapis.Clear();
+    }
+
     private Vector3 test;
     public void setCellBusy(float x, float y, float z, cellBusyState state, GameObject gameObjectRef)
     {
@@ -80,6 +93,7 @@ public class gridManager : MonoBehaviour
             }
             
         }
+
     }
 
 

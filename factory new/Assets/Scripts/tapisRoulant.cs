@@ -6,6 +6,9 @@ public class tapisRoulant : MonoBehaviour
 {
         private gridManager grid;
         private  Vector3 currentCell;
+        [SerializeField] private Material redArrow;
+        [SerializeField] private Material blueArrow;
+        public bool conveyorActive = false;
 
     void Start()
     {
@@ -18,10 +21,12 @@ public class tapisRoulant : MonoBehaviour
 
 
 
-    private void flipFlopActive(bool active)
+    public void flipFlopActive(bool active)
     {
+      conveyorActive = active;
         if(active)
         {
+            changeMaterials();
                if(this.transform.rotation.eulerAngles.y == 90)
         {
               grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.MovementAddZ, null);
@@ -86,6 +91,8 @@ public class tapisRoulant : MonoBehaviour
         }
         else
         {
+             
+              changeMaterials();
               grid.setCellBusy(currentCell.x, currentCell.y+1, currentCell.z, gridManager.cellBusyState.Void, null);
               grid.setCellBusy(currentCell.x+1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.Void, null);
               grid.setCellBusy(currentCell.x-1, currentCell.y+1, currentCell.z, gridManager.cellBusyState.Void, null);
@@ -99,5 +106,24 @@ public class tapisRoulant : MonoBehaviour
               grid.setCellBusy(currentCell.x-1, currentCell.y+1, currentCell.z-1, gridManager.cellBusyState.Void, null);
 
         }
+    }
+
+private void changeMaterials()
+{
+            if(conveyorActive == false)
+            {    
+            this.transform.GetChild(2).GetComponent<MeshRenderer>().material = redArrow;
+            }
+            else
+            {
+            this.transform.GetChild(2).GetComponent<MeshRenderer>().material = blueArrow;
+            }
+}
+    void Destroy()
+    {
+    if(grid != null)
+    {
+      flipFlopActive(false);
+    }
     }
 }

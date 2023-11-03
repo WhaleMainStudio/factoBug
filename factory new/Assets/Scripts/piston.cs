@@ -12,11 +12,12 @@ public class piston : MonoBehaviour
     private bool canHit = true;
     private bool flipFlop = false;
     private Dictionary<Vector3, gridManager.cellBusyState> cachesStates = new  Dictionary<Vector3, gridManager.cellBusyState>();
-    
+    private turnManager _turnManager;
 
     void Start()
     {
         grid = GameObject.Find("grid").GetComponent<gridManager>();
+        _turnManager = GameObject.Find("Managers").GetComponent<turnManager>();
         turnManagerData.pistons.Add(this);
         turnManagerData.pistonAction.Add(this, false);
         StartCoroutine(hit());
@@ -55,21 +56,15 @@ IEnumerator hit()
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
             hitPoint.transform.localPosition = new Vector3(hitPoint.transform.localPosition.x-1, hitPoint.transform.localPosition.y, hitPoint.transform.localPosition.z);
         }
+
         turnManagerData.pistonAction[this] = false;
         if(turnManagerData.pistons.Last() == this)
         {
-            if(turnManagerData.fusions.Count > 0)
-            {
-                turnManagerData.fusionAction[turnManagerData.fusions.First()] = true;
-                turnManagerData.fusions.First().addCubes();
-            }
-            else
-            {
-            }
+            _turnManager.nextTurnRoutine("piston", turnManagerData.pistons.IndexOf(this));
         }
-        else
+       else
         {
-           turnManagerData.pistonAction[turnManagerData.pistons[turnManagerData.pistons.IndexOf(this) + 1]] = true;
+            _turnManager.nextTurn("piston", turnManagerData.pistons.IndexOf(this));
         }
         flipFlop = false;
         
@@ -86,7 +81,6 @@ IEnumerator hit()
             flipFlopActive(true, grid.getCurrentCellByPosition(hitPoint.transform.position));
         }
         flipFlop = true;
-        
         }
 
     }
@@ -160,4 +154,17 @@ IEnumerator hit()
             }
         }
     }
+
+
+
+    // void Update()
+    // {
+    //             if(turnManagerData.pistons.Contains(this))
+    //     {
+    //     if(turnManagerData.pistonAction[turnManagerData.pistons[turnManagerData.pistons.IndexOf(this)]] == true)
+    //     {
+    //     Debug.Log("tour de piston");
+    //     }
+    //     }
+    //}
 }

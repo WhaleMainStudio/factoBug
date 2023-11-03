@@ -10,21 +10,23 @@ public class baseCubesSpawner : MonoBehaviour
         private gridManager grid;
     [SerializeField] private float spawnTime = 0.1f;
     private bool spawnCubes = true;
+    private turnManager _turnManager;
     
 
     void Start()
     {
         grid = GameObject.Find("grid").GetComponent<gridManager>();
-        turnManagerData.spawners.Add(this);
+        _turnManager = GameObject.Find("Managers").GetComponent<turnManager>();
+       turnManagerData.spawners.Add(this);
 
-        if(turnManagerData.spawners.First() == this)
-        {
-            turnManagerData.spawnerAction.Add(this, true);             
-        }
-        else
-        {
-             turnManagerData.spawnerAction.Add(this, false);
-        }
+       if(turnManagerData.spawners.First() == this)
+       {
+           turnManagerData.spawnerAction.Add(this, true);             
+       }
+       else
+       {
+            turnManagerData.spawnerAction.Add(this, false);
+       }
         StartCoroutine(spawnCube());
     }
 
@@ -34,7 +36,7 @@ IEnumerator spawnCube()
     {
         yield return new WaitForSeconds(spawnTime);
 
-        if(grid.checkCellBusy(grid.getCurrentCellByPosition(spawnpoint.transform.position)) != gridManager.cellBusyState.Collider)
+        if(grid.checkCellBusy(grid.getCurrentCellByPosition(spawnpoint.transform.position)) != gridManager.cellBusyState.Collider && (grid.checkCellBusy(grid.getCurrentCellByPosition(spawnpoint.transform.position - new Vector3(0,1,0))) != gridManager.cellBusyState.Void))
         {
             if(turnManagerData.spawnerAction[this] == true)
             {
@@ -42,19 +44,15 @@ IEnumerator spawnCube()
                 Instantiate(cube, spawnpoint.transform.position, Quaternion.identity);
                 if(turnManagerData.spawners.Last() == this)
                     {
-                        if(turnManagerData.cubes.Count > 0)
-                        {    
-                          turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
-                          Debug.Log("next first cube");
-                        }
-                        else
-                        {
-                          turnManagerData.spawnerAction[turnManagerData.spawners.First()] = true;
-                        }
+                         if(turnManagerData.cubes.Count > 0)
+                         {    
+                           turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
+                         }
+                        _turnManager.nextTurnRoutine("spawner", turnManagerData.spawners.IndexOf(this));
                     }
                     else
                     {
-                    turnManagerData.spawnerAction[turnManagerData.spawners[turnManagerData.spawners.IndexOf(this) + 1]] = true;
+                        _turnManager.nextTurn("spawner", turnManagerData.spawners.IndexOf(this));
                     }
             }
         }
@@ -65,22 +63,26 @@ IEnumerator spawnCube()
                 turnManagerData.spawnerAction[this] = false;
                 if(turnManagerData.spawners.Last() == this)
                     {
-                        if(turnManagerData.cubes.Count > 0)
-                        {               
-                          turnManagerData.cubesAction[turnManagerData.cubes.First()] = true;
-                          Debug.Log("next first cube");
-                        }
-                        else
-                        {
-                          turnManagerData.spawnerAction[turnManagerData.spawners.First()] = true;
-                        }
-                    }
+                        _turnManager.nextTurnRoutine("spawner", turnManagerData.spawners.IndexOf(this));
+                     }
                     else
-                    {
-                    turnManagerData.spawnerAction[turnManagerData.spawners[turnManagerData.spawners.IndexOf(this) + 1]] = true;
-                    }
+                     {
+                        _turnManager.nextTurn("spawner", turnManagerData.spawners.IndexOf(this));
+                     }
             }
         }
     }
 }
+
+
+    // void Update()
+    // {
+    //             if(turnManagerData.spawners.Contains(this))
+    //     {
+    //     if(turnManagerData.spawnerAction[turnManagerData.spawners[turnManagerData.spawners.IndexOf(this)]] == true)
+    //     {
+    //     Debug.Log("tour de spawners");
+    //     }
+    //     }
+    // }
 }

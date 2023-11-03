@@ -366,6 +366,9 @@
 "Assets/Scripts/turnManager.cs"
 "Assets/Scripts/turnManagerData.cs"
 "Assets/Scripts/validator.cs"
+"Assets/UIs/UI_inGame.cs"
+"Assets/UIs/UI_mainMenu.cs"
+"Assets/UIs/UI_Victory.cs"
 -langversion:9.0
 
 /deterministic

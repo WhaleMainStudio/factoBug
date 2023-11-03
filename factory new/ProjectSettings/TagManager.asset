@@ -6,6 +6,11 @@ TagManager:
   tags:
   - movingCube
   - fusion
+  - sol
+  - piston
+  - spawner
+  - conveyor
+  - validator
   layers:
   - Default
   - TransparentFX

@@ -106,12 +106,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2447232601010014452}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f071e3e1524418c40b295251eaac0f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeInGrid: {x: 1, y: 0, z: 1}
+  sizeInGrid: {x: 3, y: 1, z: 3}
 --- !u!1 &4958859605718404765
 GameObject:
   m_ObjectHideFlags: 0

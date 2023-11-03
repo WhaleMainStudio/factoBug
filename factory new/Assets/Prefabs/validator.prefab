@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3673236957121745298}
   - component: {fileID: 9124002969519155036}
   - component: {fileID: 7702472259098229242}
-  - component: {fileID: 5083689067385621839}
   - component: {fileID: 2827038140776634719}
   m_Layer: 0
   m_Name: Cube (3)
@@ -85,27 +84,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5083689067385621839
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5383553028586765288}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2827038140776634719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f071e3e1524418c40b295251eaac0f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeInGrid: {x: 1, y: 4, z: 1}
+  sizeInGrid: {x: 1, y: 3, z: 1}
 --- !u!1 &7057948401910163042
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +108,7 @@ GameObject:
   - component: {fileID: 8223284762138731362}
   m_Layer: 0
   m_Name: validator
-  m_TagString: Untagged
+  m_TagString: validator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,7 +141,6 @@ GameObject:
   - component: {fileID: 5464964624464920250}
   - component: {fileID: 1496386715267864437}
   - component: {fileID: 7071334083261085042}
-  - component: {fileID: 3300232318886502716}
   - component: {fileID: 2563929981786689781}
   - component: {fileID: 3528975353986497433}
   m_Layer: 0
@@ -238,27 +215,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3300232318886502716
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8087749754139585388}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2563929981786689781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,4 +239,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f071e3e1524418c40b295251eaac0f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeInGrid: {x: 1, y: 0, z: 1}
+  sizeInGrid: {x: 3, y: 1, z: 3}

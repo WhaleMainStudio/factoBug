@@ -22,10 +22,12 @@ public class spawnedCube : MonoBehaviour
     private float delayBetweenMoves = 0.005f;
     private Vector3 lastMove;
     private bool doubleTurn = false;
+    private turnManager _turnManager;
 
     void Start()
     {
         grid = GameObject.Find("grid").GetComponent<gridManager>();
+        _turnManager = GameObject.Find("Managers").GetComponent<turnManager>();
         turnManagerData.cubes.Add(this);
         turnManagerData.cubesAction.Add(this, false);
 
@@ -57,30 +59,17 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
     {
         if(curentCell == cellFrom0 ||curentCell == cellFrom1 || curentCell == cellFrom2)
         {
-
-     grid.setCellBusy(curentCell, cacheCellState, cacheCellobject);
-      moveToCell((int)cellToMove.x, (int)cellToMove.y,(int)cellToMove.z);
-    // if(this.transform.parent != null)
-    // {
-     //   this.transform.parent.transform.position = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.parent.transform.position) + offset);
-    // }
-    // else
-    // {
-        this.transform.position = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.position) + offset);
-    // }
-       
-     curentCell = grid.getCurrentCellByPosition(this.transform.position);
-     checkCurrentCell();
-     cacheCellState = grid.checkCellBusy(curentCell);
-     cacheCellobject = grid.checkCellBusyObject(curentCell);
-     grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
-
+            grid.setCellBusy(curentCell, cacheCellState, cacheCellobject);
+            moveToCell((int)cellToMove.x, (int)cellToMove.y,(int)cellToMove.z);
+            this.transform.position = grid.getCurrentPositionByCell(grid.getCurrentCellByPosition(this.transform.position) + offset);
+            
+            curentCell = grid.getCurrentCellByPosition(this.transform.position);
+            checkCurrentCell();
+            cacheCellState = grid.checkCellBusy(curentCell);
+            cacheCellobject = grid.checkCellBusyObject(curentCell);
+            grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
         }
     }
-    else
-    {
-    }
-
 }
 
     public void checkCurrentCell()
@@ -110,20 +99,16 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
                     destroyCube();
                  }
         }
-            if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z) != gridManager.cellBusyState.Collider || grid.checkCellBusy((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z) != gridManager.cellBusyState.MovementAddY)
-            {
-                // if(this.transform.childCount > 0)
-                // {
-                //     foreach (GameObject item in this.transform)
-                //     {
-                //         item.GetComponent<spawnedCube>().moveToCell((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z);
-                //         item.GetComponent<spawnedCube>().canMove = true;
-                //     }
-                //}
-            moveToCell((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z);
-            canMove = true;
-            }
-        
+            // if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z) == gridManager.cellBusyState.Void && grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) != gridManager.cellBusyState.MovementAddY)
+            // {
+            // moveToCell((int)currentCell.x, (int)currentCell.y-1, (int)currentCell.z);
+            // lastMove = new Vector3(0, -1, 0);
+            // canMove = true;
+            // }
+//                 if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.Collider)
+//         {
+// endTurn();
+//         }
         if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.MovementAddX)
         {
             moveToCell((int)currentCell.x+1, (int)currentCell.y, (int)currentCell.z);
@@ -150,19 +135,8 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
         }
          if(grid.checkCellBusy((int)currentCell.x, (int)currentCell.y, (int)currentCell.z) == gridManager.cellBusyState.Win)
         {
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
-            Debug.Log("quit");
             grid.victory();
-
             Time.timeScale = 0;
-            Application.Quit();
         }
         
     }
@@ -208,7 +182,7 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
              {
                 if(this.transform.parent == null)
                 {
-                this.transform.position = Vector3.MoveTowards(this.transform.position, grid.getCurrentPositionByCell(x,y,z), 30* Time.deltaTime);
+                this.transform.position = Vector3.MoveTowards(this.transform.position, grid.getCurrentPositionByCell(x,y,z), 30* delayBetweenMoves);
                 }
                 else
                 {
@@ -233,6 +207,8 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
 
        if(this.transform.position == grid.getCurrentPositionByCell(x,y,z) && turnManagerData.cubesAction[this] == true)
             {
+                if(curentCell != new Vector3(x,y,z))
+                {
             grid.setCellBusy(curentCell, cacheCellState, cacheCellobject);
             checkCurrentCell();
             
@@ -240,7 +216,9 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
             cacheCellState = grid.checkCellBusy(curentCell);
             cacheCellobject = grid.checkCellBusyObject(curentCell);
             grid.setCellBusy(curentCell, gridManager.cellBusyState.Collider, this.gameObject);
+                }
 
+            
             endTurn();
 
             }
@@ -280,25 +258,19 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
             moveToCell(currentCell + (lastMove * this.transform.childCount));
             canMove = true;
             doubleTurn = true;
-            return;
+           // return;
             }
             if(doubleTurn == true)
             {
                  turnManagerData.cubesAction[this] = false;
                     if(turnManagerData.cubes.Last() == this)
                     {
-                        if(turnManagerData.pistons.Count > 0)
-                        {               
-                          turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
-                        }
-                        else
-                        {
-                        }
+                        _turnManager.nextTurnRoutine("cube", turnManagerData.cubes.IndexOf(this));
                     }
-                    else
-                    {
-                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
-                    }
+                     else
+                     {
+                        _turnManager.nextTurn("cube", turnManagerData.cubes.IndexOf(this));
+                     }
                     doubleTurn = false;
             }
         }
@@ -306,20 +278,22 @@ public void pistonned(Vector3 offset, Vector3 cellToMove, Vector3 cellFrom0, Vec
         {
                     turnManagerData.cubesAction[this] = false;
                     if(turnManagerData.cubes.Last() == this)
-                    {
-                        if(turnManagerData.pistons.Count > 0)
-                        {               
-                          turnManagerData.pistonAction[turnManagerData.pistons.First()] = true;
-                        }
-                        else
-                        {
-                        }
+                    {  
+                        _turnManager.nextTurnRoutine("cube", turnManagerData.cubes.IndexOf(this));        
                     }
                     else
                     {
-                    turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this) + 1]] = true;
+                        _turnManager.nextTurn("cube", turnManagerData.cubes.IndexOf(this));
                     }
         }
                    
     }
+
+    //     void Update()
+    // {
+    //     if(turnManagerData.cubesAction[turnManagerData.cubes[turnManagerData.cubes.IndexOf(this)]] == true)
+    //     {
+    //     Debug.Log("tour de cube");
+    //     }
+    // }
 }
